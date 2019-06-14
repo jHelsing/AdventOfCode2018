@@ -4,13 +4,14 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Day2 {
 
     public static void main(String[] args) {
         Task1 task1 = new Task1();
 
-        String task1Input = task1.readInput();
+        ArrayList<String> task1Input = task1.readInput();
         System.out.println("Result task 1 " + task1.checksum(task1Input));
 
         System.exit(0);
@@ -20,27 +21,26 @@ public class Day2 {
     private static class Task1 {
         private final String path = "src/main/resources/day2-input1.txt";
 
-        int checksum(String input) {
+        int checksum(ArrayList<String> input) {
             // TODO Implement solution
             return -1;
         }
 
-        String readInput() {
+        ArrayList<String> readInput() {
             BufferedReader reader = null;
             try {
                 reader = new BufferedReader(new FileReader(path));
             } catch (FileNotFoundException e) {
                 System.out.println("Failed to instantiate FileReader for " + path);
             }
-            StringBuilder builder = new StringBuilder();
+            ArrayList<String> strs = new ArrayList<>();
             try {
                 String currentLine = null;
                 if (reader != null) {
                     currentLine = reader.readLine();
                 }
                 while (currentLine != null) {
-                    builder.append(currentLine);
-                    builder.append("\n");
+                    strs.add(currentLine);
                     currentLine = reader.readLine();
                 }
 
@@ -62,7 +62,7 @@ public class Day2 {
                     ex.printStackTrace();
                 }
             }
-            return builder.toString();
+            return strs;
         }
     }
 
