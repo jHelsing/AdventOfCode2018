@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.TreeSet;
 
 public class Day2 {
 
@@ -22,8 +24,39 @@ public class Day2 {
         private final String path = "src/main/resources/day2-input1.txt";
 
         int checksum(ArrayList<String> input) {
-            // TODO Implement solution
-            return -1;
+            int countTwo = 0;
+            int countThree = 0;
+            for (String id : input) {
+                TreeSet<Character> chars = new TreeSet<>();
+                for (int i = 0; i < id.length(); i++) {
+                    chars.add(id.charAt(i));
+                }
+                System.out.println("Chars: " + chars.toString());
+
+                Iterator<Character> iterator = chars.iterator();
+                boolean countTwoNotFound = true;
+                boolean countThreeNotFound = true;
+                while (iterator.hasNext()) {
+
+                    char next = iterator.next();
+                    int count = 0;
+                    for (int i = 0; i < id.length(); i++) {
+                        if (next == id.charAt(i)) {
+                            count++;
+                        }
+                    }
+                    if (count == 2 && countTwoNotFound) {
+                        countTwo++;
+                        countTwoNotFound = false;
+                    } else if (count == 3 && countThreeNotFound) {
+                        countThree++;
+                        countThreeNotFound = false;
+                    }
+                }
+                System.out.println("ID " + id + " count2 = " + countTwo + " count3 = " + countThree);
+
+            }
+            return countTwo * countThree;
         }
 
         ArrayList<String> readInput() {
